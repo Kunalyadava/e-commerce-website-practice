@@ -1,0 +1,330 @@
+<app-nav></app-nav>
+<h1>{{"profile.intro"|translate }}</h1>
+<section class="style">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col">
+        <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item active" aria-current="page">{{"profile.userProfile"|translate}}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img [src]="avatarUrl" errorImage="assets/error.png" class="rounded-circle img-fluid width" #profilePhoto
+              (click)="triggerFileInput()">
+            <input type="file" id="file-input" class="display" #fileInput (change)="onChange($event)">
+            <h5 class="my-3">{{userData?.firstName}} {{userData?.lastName}}</h5>
+            <p class="text-muted mb-1">{{userData?.position}}</p>
+            <p class="text-muted mb-4">{{userData?.bio}}</p>
+            <div class="d-flex justify-content-center mb-2">
+              <a [href]="'tel:'+userData?.mobile" class="btn btn-outline-primary ms-1">
+                <i class="bi bi-telephone-fill"></i>{{"profile.call"|translate}}
+              </a>
+              <div class="me-2"></div>
+              <a [href]="'mailto:'+userData?.email" class="btn btn-primary">
+                <i class="bi bi-envelope-fill"></i>{{"profile.email"|translate}}
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-4 mb-lg-0">
+          <div class="card-body p-0">
+            <ul class="list-group list-group-flush rounded-3">
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <i class="bi bi-pencil"></i>
+                </a>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <a href="{{userData?.portfolio}}">
+                  <i class="bi bi-globe2"></i>
+                </a>
+                <p class="mb-0">{{userData?.portfolio}}</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <a href="{{userData?.github}}">
+                  <i class="bi bi-github"></i>
+                </a>
+                <p class="mb-0">{{userData?.github}}</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <a href="{{userData?.twitter}}">
+                  <i class="bi bi-twitter"></i>
+                </a>
+                <p class="mb-0">{{userData?.twitter}}</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <a href="{{userData?.instagram}}">
+                  <i class="bi bi-instagram"></i>
+                </a>
+                <p class="mb-0">{{userData?.instagram}}</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <a href="{{userData?.fb}}">
+                  <i class="bi bi-facebook"></i>
+                </a>
+                <p class="mb-0">{{userData?.fb}}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">{{"profile.editUserData"|translate}}</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">
+                  <li class="bi bi-pencil" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  </li>
+                </p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">{{"profile.fullName"|translate}}</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{userData?.firstName}} {{userData?.lastName}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">{{"profile.email"|translate}}</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{userData?.email}} </p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">{{"profile.gender"|translate}}</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{userData?.gender}} </p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">{{"profile.mobile"|translate}}</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{userData?.mobile}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">{{"profile.dob"|translate}}</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{userData?.dob |date:'dd/MM/yy' }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">{{"profile.address"|translate}}</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{userData?.address}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">{{"profile.userDetails"|translate}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formValue" action="">
+          <div class="mb-3">
+            <div class="mb-3"
+              [ngClass]="{'has-error': formValue.get('firstName')?.invalid && formValue.get('firstName')?.touched}">
+              <label for="exampleInputEmail1" class="form-label">{{"profile.firstName"|translate}}</label>
+              <input type="text" formControlName="firstName" class="form-control" id="firstName"
+                aria-describedby="emailHelp">
+              @if (formValue.get('firstName')?.hasError('required') && formValue.get('firstName')?.touched) {
+              <div class="error-message">{{"profile.firstNameIs"|translate}}
+                <strong>{{"profile.required"|translate}}</strong>
+              </div>
+              }
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="mb-3"
+              [ngClass]="{'has-error': formValue.get('lastName')?.invalid && formValue.get('lastName')?.touched}">
+              <label for="exampleInputPassword1" class="form-label">{{"profile.lastName"|translate}}</label>
+              <input type="text" formControlName="lastName" class="form-control" id="lastName">
+              @if (formValue.get('lastName')?.hasError('required') && formValue.get('lastName')?.touched) {
+              <div class="error-message">{{"profile.lastNameIs"|translate}}
+                <strong>{{"profile.required"|translate}}</strong>
+              </div>
+              }
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="mb-3"
+              [ngClass]="{'has-error': formValue.get('mobile')?.invalid && formValue.get('mobile')?.touched}">
+              <label for="exampleInputPassword1" class="form-label">{{"profile.mobileNumber"|translate}}</label>
+              <input type="text" formControlName="mobile" class="form-control" id="mobile">
+              @if (formValue.get('mobile')?.hasError('required') && formValue.get('mobile')?.touched) {
+              <div class="error-message">{{"profile.mobileIs"|translate}}
+                <strong>{{"profile.required"|translate}}</strong>
+              </div>
+              }
+              @if(formValue.get('mobile')?.hasError('minLength')){
+              <div class="error-message">
+                {{"profile.mobileMinLength" | translate }}<strong>10</strong>
+              </div>
+              }
+              @if(formValue.get('mobile')?.hasError('maxLength')){
+              <div class="error-message">
+                {{ "profile.mobileMaxLength" | translate }} <strong>12</strong>
+              </div>
+              }
+              @if(formValue.get('mobile')?.hasError('pattern')){
+              <div class="error-message"> <strong> {{ "profile.mobilePattern" | translate }} </strong>
+              </div>
+              }
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">{{"profile.emailAdddress"|translate}}</label>
+            <input type="email" formControlName="email" class="form-control" id="exampleInputEmail1"
+              aria-describedby="emailHelp" [readonly]="!allowEditEmail">
+          </div>
+          <label class="mb-3">{{"profile.gender"|translate}}</label>
+          <mat-radio-group aria-label="Select an option" formControlName="gender">
+            <mat-radio-button value="male">{{"profile.genderMale"|translate}}</mat-radio-button>
+            <mat-radio-button value="female">{{"profile.genderFemale"|translate}}</mat-radio-button>
+            <mat-radio-button value="other">{{"profile.genderOther"|translate}}</mat-radio-button>
+          </mat-radio-group>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">{{"profile.dob"|translate}}</label>
+            <input type="text" formControlName="dob" class="form-control" id="dob" [readonly]="!allowEditdob">
+          </div>
+          <div class="mb-3">
+            <div class="mb-3"
+              [ngClass]="{'has-error': formValue.get('position')?.invalid && formValue.get('position')?.touched}">
+              <label for="exampleInputPassword1" class="form-label">{{"profile.position"|translate}}</label>
+              <input type="text" formControlName="position" class="form-control" id="position">
+              @if (formValue.get('position')?.hasError('required') && formValue.get('position')?.touched) {
+              <div class="error-message">{{"profile.positionIs"|translate}}
+                <strong>{{"profile.required"|translate}}</strong>
+              </div>
+              }
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="mb-3" [ngClass]="{'has-error': formValue.get('bio')?.invalid && formValue.get('bio')?.touched}">
+              <label for="exampleInputEmail1" class="form-label">{{"profile.bio"|translate}}</label>
+              <input type="text" formControlName="bio" class="form-control" id="bio" aria-describedby="emailHelp">
+              @if (formValue.get('bio')?.hasError('required') && formValue.get('bio')?.touched) {
+              <div class="error-message">{{"profile.bioIs"|translate}} <strong>{{"profile.required"|translate}}</strong>
+              </div>
+              }
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="mb-3"
+              [ngClass]="{'has-error': formValue.get('address')?.invalid && formValue.get('address')?.touched}">
+              <label for="exampleInput" class="form-label">{{"profile.address"|translate}}</label>
+              <input type="text" formControlName="address" class="form-control" id="address">
+              @if (formValue.get('address')?.hasError('required') && formValue.get('address')?.touched) {
+              <div class="error-message">{{"profile.addressIs"|translate}}
+                <strong>{{"profile.required"|translate}}</strong>
+              </div>
+              }
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">{{"profile.fbLink"|translate}}</label>
+            <input type="text" formControlName="fb" class="form-control" id="Facebook" pattern="https?://.+">
+            @if (formValue.get('fb')?.hasError('pattern')) {
+            <div class="error-message">{{"profile.urlIs"|translate}}<strong>{{"profile.invalid"|translate}}</strong>
+            </div>
+            }
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">{{"profile.twitterLink"|translate}}</label>
+            <input type="text" formControlName="twitter" class="form-control" id="twitter" pattern="https?://.+">
+            @if (formValue.get('twitter')?.hasError('pattern')) {
+            <div class="error-message">{{"profile.urlIs"|translate}} <strong>{{"profile.invalid"|translate}}</strong>
+            </div>
+            }
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">{{"profile.instaLink"|translate}}</label>
+            <input type="text" formControlName="instagram" class="form-control" id="instagram" pattern="https?://.+">
+            @if (formValue.get('instagram')?.hasError('pattern')) {
+            <div class="error-message">{{"profile.urlIs"|translate}}<strong>{{"profile.invalid"|translate}}</strong>
+            </div>
+            }
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">{{"profile.githubLink"|translate}}</label>
+            <input type="text" formControlName="github" class="form-control" id="github" pattern="https?://.+">
+            @if (formValue.get('github')?.hasError('pattern')) {
+            <div class="error-message">{{"profile.urlIs"|translate}}<strong>{{"profile.invalid"|translate}}</strong>
+            </div>
+            }
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">{{"profile.portfolioLink"|translate}}</label>
+            <input type="text" formControlName="portfolio" class="form-control" id="portfolio" pattern="https?://.+">
+            @if (formValue.get('portfolio')?.hasError('pattern')){
+            <div class="error-message">{{"profile.urlIs"|translate}}<strong>{{"profile.invalid"|translate}}</strong>
+            </div>
+            }
+          </div>
+          <div class="mb-3">
+            <label>{{"profile.avatar"|translate}}:</label>
+            <input matInput formControlName="avatar">
+            <input type="file" (change)="onChange($event)">
+            <button type="button" class="btn btn-danger" [disabled]="!avatarUrl"
+              (click)="removeImage()">{{"profile.removeImage"|translate}}</button>
+            @if (formValue.get('avatar')?.errors?.['invalidFormat']) {
+            <div class="error-message">{{"profile.imageFormatMsg"|translate}}<strong>JPEG, PNG, or
+                JPG</strong>
+            </div>
+            }
+            @if (formValue.get('avatar')?.errors?.['maxSize']) {
+            <div class="error-message">{{"profile.imageSizeMsg"|translate}}<strong>200KB.</strong>
+            </div>
+            }
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="cancel"
+          data-bs-dismiss="modal">{{"profile.close"|translate}}</button>
+        <button type="button" class="btn btn-primary" (click)="updateProfile()"
+          [disabled]="showUpdate ? formValue.invalid : false">{{"profile.update"|translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>

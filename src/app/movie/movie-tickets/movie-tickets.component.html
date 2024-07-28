@@ -1,0 +1,51 @@
+<app-nav></app-nav>
+<!-- <p>movie-tickets works!</p> -->
+
+<div id="top" class="container" ng-app="moviesApp" ng-controller="searchMoviesCtrl">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="text-uppercase text-muted text-center mt-5 mb-1 h3"><span>{{"movieTickets.heading1"|translate}}</span></h1>
+      <h2 class="text-muted text-center mb-5 h6"> &mdash; {{"movieTickets.heading2"|translate}} &mdash;</h2>
+      <form name="searchForm">
+        <input type="search" class="form-control mt-3" placeholder="search for movies" [(ngModel)]="search" [ngModelOptions]="{standalone: true}" (input)="filterMovies()"/>
+      </form>
+    </div>
+  </div>
+  <div class="row justify-content-around">
+    @for( movies of filteredMovies;track movies){
+    <div class="col-sm-6 col-md-4 mt-5 animated slideInUp d-flex">
+      <div class="card-block flex-fill">
+        <b>{{movies.Title}}</b>
+        <div class="image-container position-relative">
+          <img class="img-fluid" [src]="getImageUrl(movies.Images)" alt="Movie Cover Not Available" />
+        </div>
+        <div class="card-block">
+          <div class="row align-items-center">
+            <div class="col-6">
+              <div class="book-button">
+     
+                <button [routerLink]="'/moviebooking' " [queryParams]="{ id: movies.id }"> <b> {{"movieTickets.heading3"|translate}} </b></button>
+                <!-- <button [routerLink]="'/moviebooking/' + movies.imdbID"> <b>Book tickets</b></button> -->
+                <!-- <button routerLink='/moviebooking/{{movies.imdbID}}'> <b>Book tickets</b></button> -->
+                <!-- <button [routerLink]="'/moviebooking?id=' + movies.imdbID"> <b>Book tickets</b></button> -->
+              </div>
+            </div>
+            <div class="col-6">
+              <span class="rating"><b>{{"movieTickets.rating"|translate}}</b> <strong>{{movies?.imdbRating}}</strong></span>
+            </div>
+          </div>
+          <details>
+            <summary class="h5">{{movies.Genre}}</summary>
+            <strong>
+              <span class="card-block">{{"movieTickets.released"|translate}}{{movies?.Released}}</span><br>
+              <span class="card-block">{{"movieTickets.runtime "|translate}} {{movies?.Runtime}}</span><br>
+              <span class="card-block">{{"movieTickets.director "|translate}}{{movies?.Director}}</span><br>
+              <span class="card-block">{{"movieTickets.rated"|translate}}{{movies?.Rated}}</span>
+            </strong>
+          </details>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>

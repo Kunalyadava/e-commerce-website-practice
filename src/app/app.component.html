@@ -1,0 +1,14 @@
+<div class="header-container">
+    <div class="title-container">
+        <i>{{"data.title"|translate}}</i>
+    </div>
+    <div class="select-container">
+        <label for="language-select">{{"data.selectLanguage"|translate }}</label>
+        <div class="me-2"></div>
+        <select (change)="selectLanguage($event)">
+            <option value="en">{{'data.english'| translate}}</option>
+            <option value="es">{{'data.spanish'| translate}}</option>
+        </select>
+    </div>
+</div>
+<router-outlet />

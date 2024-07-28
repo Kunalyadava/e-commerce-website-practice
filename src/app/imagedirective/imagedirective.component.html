@@ -1,0 +1,8 @@
+<app-nav></app-nav>
+<ul class="image-container ">
+    @for(image of images;track image){
+    <li>
+        <img [src]="image" class="image" errorImage="assets/error.png"/>
+    </li>
+    }
+</ul>

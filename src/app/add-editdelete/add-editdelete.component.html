@@ -1,0 +1,36 @@
+<div mat-dialog-title>
+    <h1>{{ (data ? 'crud.edit' : 'crud.add') | translate }} {{ 'crud.userForm' | translate }}</h1>
+</div>
+<form [formGroup]="Form" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content class="content">
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>{{"crud.firstName"|translate}}:</mat-label>
+                <input matInput type="text" placeholder='i.e {{"crud.david"|translate}}' formControlName="first_name">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>{{"crud.lastName"|translate}}:</mat-label>
+                <input type placeholder='i.e {{"crud.smith"|translate}}' formControlName="last_name">
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>{{"crud.email"|translate}}:</mat-label>
+                <input matInput type="email" placeholder='i.e {{"crud.demail"|translate}}' formControlName="email">
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field>
+                <mat-label>{{"crud.avatar"|translate}}:</mat-label>
+                <input matInput formControlName="avatar">
+            </mat-form-field>
+            <input type="file" (change)="onChange($event)">
+        </div>
+    </div>
+    <div mat-dialog-actions class="action-btns">
+        <button class="style" mat-raised-button color="primary" type="submit">{{ (data ? 'crud.update' : 'crud.save') |
+            translate }}</button>
+        <button mat-raised-button type="button" color="warn"
+            [mat-dialog-close]="false">{{"crud.cancel"|translate}}</button>
+    </div>
+</form>

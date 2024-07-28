@@ -1,0 +1,30 @@
+<mat-toolbar color="primary">
+  <span class="example-spacer"></span>
+  <a [routerLink]="['/homepage']" class="custom-button12">
+    <img [src]="userData?.avatar" alt="avatar" errorImage="assets/error.png" class="rounded-circle img-fluid width">
+    <h5>{{userData?.firstName}}</h5>
+  </a>
+  <span class="example-spacer"></span>
+  <a mat-raised-button color="accent" routerLink="/detailspage" class="hover-color">{{"nav.crud"|translate }}</a>
+  <button mat-raised-button color="accent" (click)="redirectTo()"
+    class="hover-color">{{"nav.Datapassingbetweencomponents"|translate}}</button>
+  <a mat-raised-button color="accent" routerLink="/scrolldirective"
+    class="hover-color">{{"nav.scrolldirective"|translate}}</a>
+  <button mat-raised-button color="accent" routerLink="/imagedirective"
+    class="hover-color">{{"nav.ImageDirective"|translate}}</button>
+  <div class="me-2"></div>
+  <a mat-raised-button color="accent" routerLink="/cropandset" class="hover-color">{{"nav.Crop&set"|translate}}</a>
+  <div class="me-2"></div>
+  <a mat-raised-button color="accent" routerLink="/infiniteScroller" class="hover-color">{{"nav.infiniteScroller"|translate}}</a>
+  <div class="me-2"></div>
+  <a mat-raised-button color="accent" routerLink="/bookmyshow" class="hover-color">{{"nav.bookmyshow"|translate}}</a>
+  <div class="me-2"></div>
+  <a mat-raised-button color="accent" routerLink="/cartpage" class="hover-color">
+    <mat-icon>shopping_cart</mat-icon> 
+    <span class="cart-count">{{ cartLength }}</span>
+  </a>
+  <div class="me-2"></div>
+  <a mat-raised-button color="accent" routerLink="/orderedList" class="hover-color">{{"nav.orderlist"|translate}}</a>
+  <div class="me-2"></div>  
+  <a mat-raised-button color="accent" (click)="logout()" class="hover-color">{{"nav.logout"|translate}}</a>
+</mat-toolbar>

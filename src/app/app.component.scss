@@ -1,0 +1,17 @@
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0c0a06;
+    color: aliceblue;
+    padding: 10px;
+}
+
+.title-container {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.select-container {
+    margin-left: 20px;
+}

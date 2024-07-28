@@ -1,0 +1,121 @@
+<app-nav></app-nav>
+<section class="h-100 h-custom" style="background-color: #eee;" *ngIf="cartData.length">
+    <div class=" h-100 py-5">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card shopping-cart" style="border-radius: 15px;">
+                    <div class="card-body text-black">
+                        <div class="row">
+                            <div class="col-lg-6 px-5 py-4">
+                                <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Your products</h3>
+                                @for( products of cartData;track products){
+                                <div class="d-flex align-items-center mb-5">
+                                    <div class="flex-shrink-0">
+                                        <img [src]="products.thumbnail"
+                                            class="img-fluid" style="width: 150px;" alt="Generic placeholder image">
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <a href="#!" class="float-end text-black"><i class="fas fa-times"></i></a>
+                                        <h5 class="text-primary"></h5>
+                                        <h6 style="color: #9e9e9e;">Brand: {{products.brand}}</h6>
+                                        <div class="d-flex align-items-center">
+                                            <p class="fw-bold mb-0 me-5 pe-3">Purchase Price :<span>&#8377;</span>{{products.price}}</p>
+                                            <div class="def-number-input number-input safari_only">
+                                                <button (click)="decrementQuantity(products)" class="minus"></button>
+                                                <input class="quantity fw-bold text-black" min="0" name="quantity" [(ngModel)]="products.quantity" (change)="calculateTotalPrice()" type="number">
+                                                <button (click)="incrementQuantity(products)" class="plus"></button>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                                <hr class="mb-4" style="height: 2px; background-color: #1266f1; opacity: 1;">
+                                <div class="d-flex justify-content-between px-x">
+                                    <p class="fw-bold">You Saved:</p>
+                                    <p class="fw-bold">{{ calculateTotalDiscount() }}</p>
+                                </div>
+                                <div class="d-flex justify-content-between p-2 mb-2" style="background-color: #e1f5fe;">
+                                    <h5 class="fw-bold mb-0">Total Price:</h5>
+                                    <h5 class="fw-bold mb-0">{{totalPrice}}</h5>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 px-5 py-4">
+
+                                <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Payment</h3>
+
+                                <form class="mb-5" #form="ngForm">
+                                    <div data-mdb-input-init class="form-outline mb-5">
+                                        <input type="text" id="typeText" class="form-control form-control-lg" name="cardNumber" size="17"
+                                            [(ngModel)]="formData.cardNumber" required minlength="19" maxlength="19" #cardNumber="ngModel"
+                                            pattern="(?:\d{4}\s){3}\d{4}" /> <!-- Add pattern attribute -->
+                                        <label class="form-label" for="typeText">Card Number</label>
+                                        <div *ngIf="cardNumber?.invalid && (cardNumber?.dirty || cardNumber?.touched)"
+                                            class="text-danger">
+                                            <div *ngIf="cardNumber.errors?.['required']">Card number is required and must be 19 characters long.</div>
+                                            <div *ngIf="cardNumber.errors && cardNumber.errors['pattern']">Please enter a valid credit card number.</div> <!-- Use ['pattern'] -->
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                
+                                    <div data-mdb-input-init class="form-outline mb-5">
+                                        <input type="text" id="typeName" class="form-control form-control-lg" name="cardName" size="17"
+                                            [(ngModel)]="formData.cardName" required #cardName="ngModel" />
+                                        <label class="form-label" for="typeName">Name on card</label>
+                                        <div *ngIf="cardName.invalid && (cardName.dirty || cardName.touched)"
+                                            class="text-danger">Name on card is required.</div>
+                                    </div>
+                                
+                                    <div class="row">
+                                        <div class="col-md-6 mb-5">
+                                            <div class="form-outline">
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Expiration</mat-label>
+                                                    <input matInput [matDatepicker]="picker" placeholder="MM/YYYY" name="expiration"
+                                                        [(ngModel)]="formData.expiration" required #expiration="ngModel">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker startView="multi-year" (closed)="validateExpiration()"
+                                                        [panelClass]="'custom-datepicker'"></mat-datepicker>
+                                                </mat-form-field>
+                                                <div *ngIf="expiration.invalid && (expiration.dirty || expiration.touched)"
+                                                    class="text-danger">Expiration date is required.</div>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <div class="col-md-6 mb-5">
+                                            <div data-mdb-input-init class="form-outline">
+                                                <input type="password" id="typeText" class="form-control form-control-lg" name="cvv" size="1"
+                                                    [(ngModel)]="formData.cvv" required minlength="3" maxlength="3" #cvv="ngModel" />
+                                                <label class="form-label" for="typeText">CVV</label>
+                                                <div *ngIf="cvv.invalid && (cvv.dirty || cvv.touched)"
+                                                    class="text-danger">CVV is required and must be 3 characters long.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                    <p>Please read our <span><a routerLink="/terms">terms and conditions</a></span> before making a purchase</p>
+                                    <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block btn-lg"
+                                        [disabled]="form.invalid" (click)="buy()">Buy now</button>
+                                
+                                    <h5 class="fw-bold mb-5" style="position: absolute; bottom: 0;">
+                                        <a routerLink="/infiniteScroller"><i class="fas fa-angle-left me-2"></i>Back to shopping</a>
+                                    </h5>
+                                
+                                </form>
+                                
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div  *ngIf="!cartData.length">
+    <img src="assets/empty.png" alt="thank-you-envelope">
+</div>

@@ -1,0 +1,22 @@
+<app-nav></app-nav>
+<h1>Order List</h1>
+
+<div *ngIf="orderHistory.length > 0; else noOrders">
+  <div *ngFor="let order of orderHistory">
+    <div>
+      <h3>Order ID: {{ order.orderId }}</h3>
+      <p>Date: {{ order.date }}</p>
+      <ul>
+        <li *ngFor="let product of order.products">
+          {{ product.title }} - Price Per Item: {{ product.price }} - Quantity: {{ product.quantity }}
+        </li>
+      </ul>
+      <p>Total Price: {{ calculateTotalOrderPrice(order.products) }}</p>
+      <button (click)="downloadInvoice(order)">Download Invoice</button>
+    </div>
+    <hr>
+  </div>
+</div>
+<ng-template #noOrders>
+  <p>No orders available.</p>
+</ng-template>

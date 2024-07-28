@@ -1,0 +1,62 @@
+<app-nav></app-nav>
+<!-- The toolbar of our app -->
+<mat-toolbar color="primary">
+  <span>{{"crud.crudApp"|translate}}</span>
+  <span class="example-spacer"></span>
+  <div class="me-2"></div>
+  <button mat-raised-button color="accent" (click)="openAddEditDialog()">{{"crud.addUser"|translate}}</button>
+</mat-toolbar>
+<!-- The body of our app -->
+<div class="main-body">
+  <!-- The filter section -->
+  <mat-form-field aria-haspopup="outline">
+    <mat-label>{{"crud.filter"|translate}}</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder='i.e {{"crud.davidSmith"|translate}}' #input>
+  </mat-form-field>
+  <!-- The employee details table -->
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"crud.id"|translate}}</th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      </ng-container>
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"crud.firstName"|translate}}</th>
+        <td mat-cell *matCellDef="let row"> {{row.first_name}}</td>
+      </ng-container>
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"crud.lastName"|translate}}</th>
+        <td mat-cell *matCellDef="let row"> {{row.last_name}}</td>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"crud.email"|translate}}</th>
+        <td mat-cell *matCellDef="let row"> {{row.email}}</td>
+      </ng-container>
+      <ng-container matColumnDef="avatar">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"crud.avatar"|translate}}</th>
+        <td mat-cell *matCellDef="let row">
+          <img [src]="row.avatar" alt="assets/error.png" width="50" height="50">
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"crud.action"|translate}}</th>
+        <td mat-cell *matCellDef="let row">
+          <span (click)="openEditForm(row)" class="action-icon" style="margin-right: 5px;">
+            <mat-icon color="primary">edit</mat-icon>
+          </span>
+          <span (click)="deleteUser(row.id)" class="action-icon">
+            <mat-icon color="warn">delete</mat-icon>
+          </span>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">{{"crud.msg"|translate}}"{{input.value}}"</td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>
+</div>

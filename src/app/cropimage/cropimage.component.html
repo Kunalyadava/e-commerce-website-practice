@@ -1,0 +1,12 @@
+<app-nav></app-nav>
+<div class="image-container img">
+    <img [src]="userProfileData || 'assets/error.png'" alt="Error Image">
+</div>
+<span>
+    <input type="file" (change)="fileChangeEvent($event)" />
+</span>
+<image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4/3" format="png"
+    (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded($event)" (cropperReady)="cropperReady()"
+    (loadImageFailed)="loadImageFailed()"></image-cropper>
+<img [src]="croppedImage" />
+<button (click)="updateAvatar()">{{"crop&set.upload"|translate}}</button>

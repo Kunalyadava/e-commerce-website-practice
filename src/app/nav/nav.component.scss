@@ -1,0 +1,41 @@
+.mat-toolbar-row {
+    justify-content: space-between;
+  }
+  .mat-toolbar {
+    margin: 20px; 
+  }
+  .width{
+    width:20px
+  }
+  
+  .custom-button12 {
+    width: 74.39px;
+    height: 48.02px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .custom-button12 img {
+    width: 74.39px;
+    height: 74.39px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+  }
+  
+  .custom-button12 h5 {
+    font-size: 10px;
+  }
+  
+  .img-fluid {
+    max-width:35%
+  }
+  a.custom-button12 {
+    text-decoration: none; 
+    color: inherit;
+  }
+
+  .hover-color:hover {
+    color: rgb(8, 7, 12);
+  }
+  

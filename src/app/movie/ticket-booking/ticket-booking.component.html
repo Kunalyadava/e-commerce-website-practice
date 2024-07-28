@@ -1,0 +1,54 @@
+<app-nav></app-nav>
+<div class="wrapper">
+  <div class="card">
+    <div class="poster"><img [src]="movieDetails?.Images" [alt]="movieDetails?.Title"></div>
+    <div class="details">
+      <h1>{{ movieDetails?.Title }}</h1>
+      <h2>{{ movieDetails?.Released }} • {{ movieDetails?.imdbRating }} • {{ movieDetails?.Runtime }}</h2>
+      <div class="rating">
+        @for(star of movieDetails?.imdbRating;track star){
+        <i class="fas fa-star"></i>
+        }
+        <span>{{ movieDetails?.imdbRating }}/5</span>
+
+      </div>
+      <div class="genre">
+        <span class="tag">{{ movieDetails?.Genre }}</span>
+      </div>
+      <p class="desc">
+        {{ movieDetails?.Plot }}
+      </p>
+      <div class="cast">
+        <h3>Cast</h3>
+        <ul>
+          @for(image of movieDetails?.Images;track image){
+          <li><img [src]="image"></li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="seat-table">
+    <h4>{{"ticketsBooking.welcome"|translate}} <strong> {{userData?.firstName}}</strong></h4>
+    <b>{{"ticketsBooking.movie"|translate}} <i>{{ movieDetails?.Title }}</i></b>
+    <p> {{"ticketsBooking.movieId"|translate}}<b>{{ movieDetails?.id }}</b>{{"ticketsBooking.ticketPrice"|translate}} <b>{{ movieDetails?.ticketPrice }} </b></p>
+    <h6>{{"ticketsBooking.availableSeats"|translate}}</h6>
+    <div class="seat-map" *ngIf="movieDetails && movieDetails.seats">
+      <div *ngFor="let row of getSeatRows(movieDetails.seats)" class="seat-row">
+        <div *ngFor="let seat of row" class="seat">
+          <button [class.selected]="!seat.available" [class.available]="seat.available"
+            [class.unavailable]="!seat.available" (click)="selectSeat(seat)"
+            [disabled]="!seat.available && seat.bookedBy !== userId">
+            {{ seat.seatNumber }}
+          </button>
+
+        </div>
+      </div>
+    </div>
+    <div class="total-price-section">
+      <p>{{"ticketsBooking.totalPrice"|translate}} <input type="text" [(ngModel)]="totalPrice" class="price-input"></p>
+      <p *ngFor="let seat of selectedSeats"></p>
+      <button (click)="bookSeats()">{{"ticketsBooking.book"|translate}}</button>
+    </div>
+  </div>
+</div>

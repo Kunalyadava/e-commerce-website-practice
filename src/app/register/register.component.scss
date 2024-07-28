@@ -1,0 +1,47 @@
+  .example-form {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f4f4f4;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    margin-bottom: 20px;
+  }
+  
+  .mat-hint {
+    font-size: 12px;
+  }
+  
+  .mat-error {
+    font-size: 12px;
+  }
+  
+  .custom-button1 {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .custom-button1:hover {
+    background-color: #0056b3;
+  }
+  .example-form .hobbies {
+    margin-bottom: 20px;
+  }
+  .checkbox-container {
+    display: flex;
+    gap: 10px;
+}
